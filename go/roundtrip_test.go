@@ -33,8 +33,15 @@ func serverName() string {
 }
 
 func TestRoundTrip(t *testing.T) {
+	// This is the end-to-end integration test: it needs a live
+	// yeti-host-rpc-server. run-roundtrip.sh stands one up and sets
+	// YETI_RPC_ADDR. Without a reachable peer (a bare `go test ./...`), skip
+	// rather than fail — the offline gate is the unit suite in unit_test.go.
 	client, err := Connect(addr(), serverName())
 	if err != nil {
+		if os.Getenv("YETI_RPC_ADDR") == "" {
+			t.Skipf("no YETI_RPC_ADDR set; skipping live round-trip (run ./run-roundtrip.sh): %v", err)
+		}
 		t.Fatalf("connect: %v", err)
 	}
 	defer client.Close()
