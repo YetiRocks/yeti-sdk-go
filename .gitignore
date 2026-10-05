@@ -1,2 +1,4 @@
-/target
-**/*.rs.bk
+/lib/
+*.a
+*.lib
+yeti_sdk_go.h
