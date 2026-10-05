@@ -1,4 +1,0 @@
-# Build artifacts staged by ../build.sh — regenerate, never commit (the .a is
-# a large platform-specific archive).
-/libyeti_sdk_go.a
-/yeti_sdk_go.h
